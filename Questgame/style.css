@@ -1,16 +1,95 @@
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin-top: 100px;
-  background-color: #f0f0f0;
+  font-family: Arial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  /* ✅ Background image */
+  background-image: url('assets/paperbg.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-h1 {
-  color: #333;
+
+
+
+input {
+  
+
+  position: absolute;
+  left: 60px; /* or whatever value you use */
+  width: 280px;
+  padding: 10px;
+
+  background: transparent;     /* 🔹 Makes the background transparent */
+  border: none;                /* 🔹 Removes the default border */
+  /*border-bottom: 2px solid black; /* Optional: underline style only */
+  color: black;                /* 🔹 Text color inside input */
+  font-size: 16px;             /* 🔹 Size of text */
+  outline: none;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
+
+
+.login-btn {
+   margin-top: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+
+  width: 180px;
+  height: 60px;
+
+  background-image: url('Assets/button.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  border: none;
   cursor: pointer;
+
+  font-size: 18px;
+  color: white;
+  text-align: center;
+}
+
+
+
+#message {
+  margin-top: 10px;
+  color: red;
+}
+
+.login-container {
+   width: 512px;
+  height: 560px;
+  position: relative;
+  background-image: url('Assets/login box.jpg'); /* This is the image replacing the white box */
+  background-size: contain;
+  background-position: center;
+  padding: 30px;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+
+#username {
+  position: absolute;
+  top: 315px;  /* Move it lower to align with image */
+  left: 60px;
+  width: 280px;
+}
+
+#password {
+  position: absolute;
+  top: 385px;  /* Adjust based on image field */
+  left: 60px;
+  width: 280px;
+}
+
+#message {
+  text-align: center;
+  display: block;
+  width: 100%;
 }

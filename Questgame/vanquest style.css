@@ -1,0 +1,57 @@
+/* Full screen background */
+body {
+  margin: 0;
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('assets/paperbg.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.game-container {
+  position: relative;
+  width: 80vw;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 3px solid #fff;
+  background-color: #111;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+.avatar {
+  position: absolute;
+  width: 8%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  left: 46%;
+  transform: translateX(-50%);
+  transition: top 1s linear;
+  z-index: 2;
+}
+
+.newday {
+  width: 70%;
+  height: auto; /* Allow height to scale with aspect ratio */
+  aspect-ratio: 16 / 9; /* Or whatever the image ratio is */
+  
+  background-image: url('Assets/day conquered.jpg'); 
+  background-size: contain;  /* ✅ Shows full image without cropping */
+  background-repeat: no-repeat;
+  background-position: center;
+
+  border: none;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+}
