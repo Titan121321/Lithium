@@ -1,46 +1,95 @@
-/**function updateAvatarPosition() {
-  const avatar = document.getElementById('avatar');
+const avatar = document.getElementById('avatar');
+const taskModal = document.getElementById('taskModal');
+const taskList = document.getElementById('taskList');
+const enemyImagesContainer = document.getElementById('enemyImages');
+const taskSystem = document.getElementById('taskSystem');
 
-  const now = new Date();
-  const currentHour = now.getHours() + now.getMinutes() / 60;
+const checkpointPositions = ['90%', '75%', '60%', '45%', '30%', '15%'];
+const maxTasks = 6;
 
-  const startHour = 12.59;
-  const endHour = 12.60;
-  const totalDuration = endHour - startHour;
+const enemies = {
+  light: 'Assets/goblin.jpg',
+  medium: 'Assets/great enemy.jpg',
+  heavy: 'Assets/legend.jpg'
+};
 
-  if (currentHour >= endHour) {
-    // Day complete, redirect
-    alert("🎉 Day Conquered!");
-    window.location.href = "newday.html";
-    return;
-  }
+const fellImageMap = {
+  light: document.getElementById('enemyFellLight'),
+  medium: document.getElementById('enemyFellMedium'),
+  heavy: document.getElementById('enemyFellHeavy')
+};
 
-  // Clamp time between 6am and 10pm
-  const clampedHour = Math.min(Math.max(currentHour, startHour), endHour);
-  const progress = (clampedHour - startHour) / totalDuration;
-  const topPercent = 100 - (progress * 100);
+let tasks = [];
+let currentTaskIndex = 0;
 
-  avatar.style.top = `${topPercent}%`;
+window.onload = () => {
+  avatar.style.top = '90%';
+  avatar.style.left = '50%';
+  taskModal.style.display = 'flex';
+};
+
+function addTask() {
+  const name = document.getElementById('taskName').value.trim();
+  const priority = document.getElementById('taskPriority').value;
+
+  if (tasks.length >= maxTasks) return;
+
+  tasks.push({ name: name || `Task ${tasks.length + 1}`, priority });
+  document.getElementById('taskName').value = '';
 }
 
-// Run on load and update every minute
-window.onload = () => {
-  updateAvatarPosition();
-  setInterval(updateAvatarPosition, 60000); // Update every minute
-};
-**/
+function finishTasks() {
+  if (tasks.length === 0) return;
 
-window.onload = () => {
-  const avatar = document.getElementById('avatar');
+  taskModal.style.display = 'none';
+  taskSystem.style.display = 'block';
 
-  // Start animation
+  taskList.innerHTML = '';
+  tasks.forEach((task, index) => {
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.onchange = () => completeTask(index);
+
+    li.appendChild(checkbox);
+    li.appendChild(document.createTextNode(` ${task.name} (${task.priority})`));
+    taskList.appendChild(li);
+
+    const img = document.createElement('img');
+    img.src = enemies[task.priority];
+    img.className = 'enemy';
+    img.style.position = 'absolute';
+    img.style.top = checkpointPositions[index];
+    img.style.left = (index % 2 === 0) ? '30%' : '70%';
+    img.style.transform = 'translate(-50%, -50%)';
+    img.style.zIndex = 1;
+    enemyImagesContainer.appendChild(img);
+  });
+}
+
+function completeTask(index) {
+  if (index !== currentTaskIndex) return;
+
+  const task = tasks[index];
+  const cpTop = checkpointPositions[currentTaskIndex];
+  avatar.style.top = cpTop;
+
+  const imageToShow = fellImageMap[task.priority];
+  if (!imageToShow) return;
+
   setTimeout(() => {
-    avatar.style.top = '0%';
-  }, 500);
+    imageToShow.style.display = 'block';
 
-  // After 10.5 seconds, show alert and redirect
-  setTimeout(() => {
-    alert("🎉 Day Conquered!");
-    window.location.href = "newday.html"; // ← Change to your desired page
-  }, 10500);
-};
+    setTimeout(() => {
+      imageToShow.style.display = 'none';
+      currentTaskIndex++;
+
+      if (currentTaskIndex >= tasks.length) {
+        setTimeout(() => {
+          window.location.href = "newday.html";
+        }, 500);
+      }
+
+    }, 4000); // 🕓 show for 4 seconds
+  }, 500); // delay before showing
+}

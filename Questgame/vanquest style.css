@@ -1,12 +1,10 @@
-/* Full screen background */
 body {
   margin: 0;
- 
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('assets/paperbg.jpg'); /* Replace with your image path */
+  background-image: url('assets/paperbg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -17,41 +15,99 @@ body {
   width: 80vw;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border: 3px solid #fff;
-  background-color: #111;
+  background-color: transparent;
 }
 
 .map {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: transparent;
 }
 
-
-
+/* 🔺 Avatar size increased by 45% */
 .avatar {
   position: absolute;
-  width: 8%;
+  width: 13.9%; /* originally 9.6% */
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  left: 46%;
-  transform: translateX(-50%);
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   transition: top 1s linear;
   z-index: 2;
 }
 
-.newday {
-  width: 70%;
-  height: auto; /* Allow height to scale with aspect ratio */
-  aspect-ratio: 16 / 9; /* Or whatever the image ratio is */
-  
-  background-image: url('Assets/day conquered.jpg'); 
-  background-size: contain;  /* ✅ Shows full image without cropping */
-  background-repeat: no-repeat;
-  background-position: center;
+.checkpoint {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
 
-  border: none;
-  cursor: pointer;
-  display: block;
-  margin: 20px auto;
+.task-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.task-form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  width: 300px;
+}
+
+.task-form input,
+.task-form select {
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+}
+
+.task-system {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  background: rgba(255,255,255,0.7);
+  padding: 10px;
+  border-radius: 10px;
+  font-family: sans-serif;
+  width: 220px;
+}
+
+.task-system ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.task-system li {
+  margin-bottom: 5px;
+}
+
+/* enemy-fell image */
+.enemy-fell {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  display: none;
+  z-index: 999;
+}
+
+/* 🔺 Enemy size increased by 45% */
+.enemy {
+  width: 104px; /* originally 72px */
 }
