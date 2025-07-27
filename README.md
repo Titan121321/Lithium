@@ -1,2 +1,0 @@
-# Lithium
-Gamify Real Life
