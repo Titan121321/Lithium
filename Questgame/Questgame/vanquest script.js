@@ -46,18 +46,10 @@ function finishTasks() {
 
   taskModal.style.display = 'none';
   taskSystem.style.display = 'block';
+  renderCurrentTask();
 
-  taskList.innerHTML = '';
+  // Display enemies on map
   tasks.forEach((task, index) => {
-    const li = document.createElement('li');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.onchange = () => completeTask(index);
-
-    li.appendChild(checkbox);
-    li.appendChild(document.createTextNode(` ${task.name} (${task.priority})`));
-    taskList.appendChild(li);
-
     const img = document.createElement('img');
     img.src = enemies[task.priority];
     img.className = 'enemy';
@@ -69,7 +61,7 @@ function finishTasks() {
     enemyImagesContainer.appendChild(img);
   });
 
-  // Start 1-minute countdown
+  // 1-minute auto-end
   setTimeout(() => {
     tasks.forEach(task => {
       if (!task.completed) {
@@ -83,11 +75,10 @@ function finishTasks() {
   }, 60000);
 }
 
-function completeTask(index) {
-  if (index !== currentTaskIndex) return;
 
+function completeTask(index) {
   const task = tasks[index];
-  const cpTop = checkpointPositions[currentTaskIndex];
+  const cpTop = checkpointPositions[index];
   avatar.style.top = cpTop;
 
   const imageToShow = fellImageMap[task.priority];
@@ -96,17 +87,70 @@ function completeTask(index) {
   imageToShow.style.display = 'block';
   setTimeout(() => {
     imageToShow.style.display = 'none';
-    currentTaskIndex++;
     task.completed = true;
-
-    // Add points
     if (task.priority === 'light') points += 2;
     else if (task.priority === 'medium') points += 3;
     else if (task.priority === 'heavy') points += 5;
 
+    currentTaskIndex++;
+    renderCurrentTask();
     if (currentTaskIndex >= tasks.length) {
       localStorage.setItem('userScore', points);
-      window.location.href = "score.html";
+      window.location.href = 'score.html';
     }
   }, 1000);
 }
+
+function skipTask(index) {
+  const task = tasks[index];
+  const cpTop = checkpointPositions[index];
+  avatar.style.top = cpTop;
+
+  // Deduct points
+  if (task.priority === 'light') points -= 2;
+  else if (task.priority === 'medium') points -= 3;
+  else if (task.priority === 'heavy') points -= 5;
+
+  const fallImage = document.createElement('img');
+  fallImage.src = 'Assets/you fell.jpg'; // 👈 Add a “fell” image
+  fallImage.className = 'enemy-fell';
+  document.body.appendChild(fallImage);
+  fallImage.style.display = 'block';
+
+  setTimeout(() => {
+    fallImage.remove();
+    task.completed = true;
+    currentTaskIndex++;
+    renderCurrentTask();
+    if (currentTaskIndex >= tasks.length) {
+      localStorage.setItem('userScore', points);
+      window.location.href = 'score.html';
+    }
+  }, 1000);
+}
+
+function renderCurrentTask() {
+  taskList.innerHTML = '';
+
+  if (currentTaskIndex >= tasks.length) return;
+
+  const task = tasks[currentTaskIndex];
+  const li = document.createElement('li');
+  li.textContent = `${task.name} (${task.priority})`;
+
+  const doneBtn = document.createElement('button');
+  doneBtn.innerText = 'Done';
+  doneBtn.onclick = () => completeTask(currentTaskIndex);
+  doneBtn.className = 'task-btn';
+
+  const skipBtn = document.createElement('button');
+  skipBtn.innerText = 'Skip';
+  skipBtn.onclick = () => skipTask(currentTaskIndex);
+  skipBtn.className = 'task-btn';
+
+  li.appendChild(document.createElement('br'));
+  li.appendChild(doneBtn);
+  li.appendChild(skipBtn);
+  taskList.appendChild(li);
+}
+

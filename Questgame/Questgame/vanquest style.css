@@ -111,3 +111,19 @@ body {
 .enemy {
   width: 104px; /* originally 72px */
 }
+
+.task-btn {
+  margin: 5px;
+  padding: 8px 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.task-btn:hover {
+  opacity: 0.8;
+}
+

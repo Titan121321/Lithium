@@ -35,6 +35,7 @@ input {
 
 .login-btn {
   margin-top: 480px;         /* Pushes the button lower */
+  margin-left: 120px;
   width: 180px;             /* Set width manually to control size */
   height: 60px;             /* Set height to match image */
   background-image: url('Assets/button.jpg');
