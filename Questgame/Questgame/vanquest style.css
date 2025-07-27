@@ -127,3 +127,14 @@ body {
   opacity: 0.8;
 }
 
+.castle {
+  position: fixed;
+  top: 10px; /* Adjust this to move closer/farther from the top */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px; /* Adjust size as needed */
+  height: auto;
+  z-index: 10;
+  pointer-events: none; /* So it doesn't block clicks */
+}
+
