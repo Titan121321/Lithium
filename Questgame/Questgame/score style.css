@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url('Assets/paperbg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.title-image {
+  width: 80%;
+  max-width: 600px;
+}
+
+.score-card-container {
+  position: relative;
+  width: 80%;
+  max-width: 500px;
+}
+
+.score-card-image {
+  width: 100%;
+  display: block;
+}
+
+.score-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+  text-shadow: 1px 1px 2px #fff;
+  text-align: center;
+}
+
+.continue-button {
+  width: 20%;
+  max-width: 300px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.continue-button:hover {
+  transform: scale(1.05);
+}

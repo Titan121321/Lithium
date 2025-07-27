@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('assets/paperbg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Alternative: If you want to ensure container matches image aspect ratio */
+.login-container {
+  width: 512px;
+  height: 560px;
+  position: relative;
+  background-image: url('Assets/interface 2.jpg');
+  background-size: contain;        /* 🔹 Shows entire image, no cropping */
+  background-position: center;     /* 🔹 Centers the image */
+  background-repeat: no-repeat;    /* 🔹 Prevents image repetition */
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.top-textbox {
+    margin-top: 85px;
+    margin-left: 90px;
+    width: 70%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    font-size: 16px;
+    outline: none;
+    align-self: center;
+}
+
+.login-btn {
+    margin-top: 320px;
+    margin-left: 130px;
+    width: 180px;
+    height: 60px;
+    background-image: url('Assets/button.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-bottom: 30px;
+    align-self: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: opacity 0.3s;
+}

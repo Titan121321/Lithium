@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container">
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button type="button" onclick="login()" class="login-btn">
+  
+</button>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const message = document.getElementById("message");
+
+      if (username === "user123" && password === "pass123") {
+        message.style.color = "green";
+        message.textContent = "Login successful!";
+        window.location.href = "vanquest.html"; // <== ADD THIS LINE
+      } else {
+        message.style.color = "red";
+        message.textContent = "Invalid credentials.";
+      }
+    }
+  </script>
+</body>
+</html>
